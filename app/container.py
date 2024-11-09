@@ -10,7 +10,7 @@ class Container(containers.DeclarativeContainer):
 
     db = providers.Singleton(
         MongoConnection,
-        uri=os.getenv("MONGO_URI", "mongodb://localhost:27017"),
+        uri=os.getenv("MONGO_URI", "mongodb://mongo:27017"),
         db_name="intelistyle_db"
     )
 
