@@ -1,0 +1,32 @@
+# docker-compose.yaml
+
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017/garments_db
+      - DATABASE_NAME=intelistyle_db
+    volumes:
+      - .:/app
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_DATABASE: intelistyle_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./init-mongo:/docker-entrypoint-initdb.d
+
+volumes:
+  mongodb_data:
+    driver: local
