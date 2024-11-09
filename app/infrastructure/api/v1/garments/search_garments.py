@@ -20,16 +20,9 @@ async def search_garments(
     search_dto: GarmentSearch = Depends(parse_garment_search),
     garment_service: GetGarmentService = Depends(Provide[Container.garment_service])
 ):
-    """ TODO - Error/Exception handling """
-    """ TODO - QueryParams """
-    """ TODO - Pagination """
     try:
-        results = await garment_service.search_garments(
+        return await garment_service.search_garments(
             search_dto
         )
-
-        if not results:
-            raise HTTPException(status_code=404, detail='No garments found')
-        return results
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

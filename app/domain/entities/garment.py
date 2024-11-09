@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, validator
 class Garment(BaseModel):
     product_title: str
     product_categories: Optional[list] = None
-    size: Optional[str] = None
+    gender: Optional[str] = None
     price: Optional[float] = Field(default=None, ge=0, description="Price of the garment, must be non-negative")
 
     class Config:
