@@ -1,5 +1,3 @@
-# app/infrastructure/mongo_connection.py
-
 from motor.motor_asyncio import AsyncIOMotorClient
 from typing import Optional
 import os
