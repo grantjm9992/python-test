@@ -15,8 +15,8 @@ class Container(containers.DeclarativeContainer):
 
     db = providers.Singleton(
         MongoConnection,
-        uri=os.getenv("MONGO_URI", "mongodb://mongo:27017"),
-        db_name="intelistyle_db"
+        uri=os.getenv("DATABASE_URL", "mongodb://mongo:27017"),
+        db_name=os.getenv("DATABASE_NAME", "intelistyle_db")
     )
 
     garment_repository = providers.Factory(
