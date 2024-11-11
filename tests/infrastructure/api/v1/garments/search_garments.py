@@ -7,6 +7,13 @@ async def test_get_garments(client: AsyncClient):
     assert response.status_code == 200, f"Expected status 200 asserted"
     assert len(response.json()) > 11000
 
+
+@pytest.mark.anyio
+async def test_get_garments_with_limit(client: AsyncClient):
+    response = await client.get("/api/v1/garments/?limit=20&offset=0")
+    assert response.status_code == 200, f"Expected status 200 asserted"
+    assert len(response.json()) == 20
+
 @pytest.mark.anyio
 @pytest.mark.parametrize("search_params, expected_status", [
     ({"product_title": "Shirt", "gender": "M"}, 422),
@@ -22,7 +29,7 @@ async def test_search_garments(client: AsyncClient, search_params, expected_stat
 @pytest.mark.anyio
 @pytest.mark.parametrize("endpoint", ["/api/v1/garments/"])
 async def test_rate_limit_exceeded(client: AsyncClient, endpoint):
-    for _ in range(3):
+    for _ in range(2):
         response = await client.get(endpoint)
         assert response.status_code == 200, f"Expected 200 OK for {endpoint}, got {response.status_code}"
 

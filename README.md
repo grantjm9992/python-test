@@ -3,6 +3,27 @@
 
 This project is containerized with Docker, using `docker-compose` to manage service orchestration. Below are the commands to build, run, and test the application, as well as to configure MongoDB indexes and seed test data.
 
+## Usage
+
+Once set up, you can use the API endpoint to retrieve a list of garments:
+
+```
+http://localhost:8000/api/v1/garments?limit=10&offset=0
+```
+
+They are filterable by:
+
+- brand: string
+- product_title: string
+- product_categories: string
+- gender: ['men', 'women']
+- min_price: int > 0
+- max_price: int > min_price
+
+It should be noted that there is a rate limiter of 5/minute for the endpoint for referer
+
+---
+
 ## Prerequisites
 
 - Docker
@@ -12,7 +33,7 @@ This project is containerized with Docker, using `docker-compose` to manage serv
 
 ### 1. Full Setup
 
-To perform a full setup, including building, running, and creating indexes, use the following, and ignore #2 - #4
+To perform a full setup, including building and running use the following, then skip #2 and #3 
 
 ```bash
 make setup

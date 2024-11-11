@@ -12,7 +12,7 @@ mongo-indexes:
 		--eval "db.garments.createIndex({'product_categories': 1})" \
 		--eval "db.garments.createIndex({'price': 1})"
 
-setup: build run mongo-indexes
+setup: build run
 
 setup-test:
 	docker exec -it mongodb mongosh --eval "use test_intelistyle_db"
