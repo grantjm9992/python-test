@@ -2,6 +2,7 @@ from dependency_injector.wiring import inject, Provide
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from prometheus_fastapi_instrumentator import Instrumentator
 from slowapi.errors import RateLimitExceeded
 from slowapi import _rate_limit_exceeded_handler
 from app.core.fastapi.routes import add_routes
@@ -20,6 +21,8 @@ add_routes([garment_router], app)
 container = Container()
 app.container = container
 db = container.db()
+
+Instrumentator().instrument(app=app).expose(app=app)
 
 limiter_provider = LimiterProvider()
 app.state.limiter = limiter_provider.get_limiter()

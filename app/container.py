@@ -1,11 +1,10 @@
 from dependency_injector import containers, providers
+from app.core.logging.logger import Logger
 from app.domain.repositories.garment_repository_interface import IGarmentRepository
 from app.infrastructure.database.mongo_connection import MongoConnection
 from app.infrastructure.database.repositories.garment_repository import GarmentRepository
 from app.application.services.get_garment_service import GetGarmentService
 import os
-
-from app.core.logging.logger import Logger
 
 
 logger = Logger()
@@ -17,7 +16,7 @@ class Container(containers.DeclarativeContainer):
     db = providers.Singleton(
         MongoConnection,
         uri=os.getenv("MONGO_URI", "mongodb://mongo:27017"),
-        db_name="test_intelistyle_db"
+        db_name="intelistyle_db"
     )
 
     garment_repository = providers.Factory(
