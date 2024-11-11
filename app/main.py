@@ -32,3 +32,9 @@ async def startup_event(db=Provide[Container.db]):
 @inject
 async def shutdown_event(db=Provide[Container.db]):
     await db.disconnect()
+
+
+@app.exception_handler(Exception)
+async def generic_exception_handler(request, exc):
+    print(f"An error occurred: {exc}")
+    return PlainTextResponse("Internal server error", status_code=500)

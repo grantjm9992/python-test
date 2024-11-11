@@ -1,13 +1,8 @@
 from fastapi import Request, HTTPException
 from fastapi.responses import JSONResponse
-import logging
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
 
 async def validation_exception_handler(request: Request, exc: ValueError):
     errors = [{"message": error["msg"], "type": error["type"]} for error in exc.errors()]
-    logger.error('error')
     return JSONResponse(
         status_code=422,
         content={

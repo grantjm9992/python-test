@@ -5,13 +5,19 @@ from app.infrastructure.database.repositories.garment_repository import GarmentR
 from app.application.services.get_garment_service import GetGarmentService
 import os
 
+from app.core.logging.logger import Logger
+
+
+logger = Logger()
+
+
 class Container(containers.DeclarativeContainer):
     wiring_config = containers.WiringConfiguration(modules=["app.infrastructure.api.v1.garments.search_garments"])
 
     db = providers.Singleton(
         MongoConnection,
         uri=os.getenv("MONGO_URI", "mongodb://mongo:27017"),
-        db_name="intelistyle_db"
+        db_name="test_intelistyle_db"
     )
 
     garment_repository = providers.Factory(

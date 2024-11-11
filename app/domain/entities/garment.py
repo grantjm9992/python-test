@@ -2,7 +2,9 @@ from typing import Optional
 from pydantic import BaseModel, Field, validator
 
 class Garment(BaseModel):
+    product_id: str
     product_title: str
+    brand: str
     product_categories: Optional[list] = None
     gender: Optional[str] = None
     price: Optional[float] = Field(default=None, ge=0, description="Price of the garment, must be non-negative")

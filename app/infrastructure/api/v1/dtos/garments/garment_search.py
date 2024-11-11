@@ -4,6 +4,7 @@ from typing import Optional, List, Literal
 class GarmentSearch(BaseModel):
     product_title: Optional[str] = Field(None)
     product_categories: Optional[List[str]] = Field(None)
+    brand: Optional[str] = Field(None)
     min_price: Optional[float] = Field(None, ge=0)
     max_price: Optional[float] = Field(None, gt=0)
     gender: Optional[Literal["men", "women"]] = Field(None)

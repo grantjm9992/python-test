@@ -5,6 +5,7 @@ from typing import List, Optional
 from app.application.services.get_garment_service import GetGarmentService
 from app.container import Container
 from app.core.slowapi.limiter_provider import LimiterProvider
+from app.core.logging.logger import Logger
 from app.infrastructure.database.repositories.garment_repository import GarmentRepository
 from app.infrastructure.api.v1.dtos.garments.garment_search import GarmentSearch
 from app.infrastructure.api.v1.dependencies.garments.garment_query import parse_garment_search
